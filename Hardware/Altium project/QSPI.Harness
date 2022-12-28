@@ -1,0 +1,1 @@
+QSPI=NCS,CLK,QSPI_IO[0..3]

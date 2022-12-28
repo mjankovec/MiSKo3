@@ -1,0 +1,1 @@
+ST-LinkUpgrade.exe -force_prog -volume TEST -usb_max_current 300
