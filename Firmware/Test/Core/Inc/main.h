@@ -74,7 +74,6 @@ void Error_Handler(void);
 #define JOY_BTN_GPIO_Port GPIOC
 #define BTN_ESC_Pin GPIO_PIN_14
 #define BTN_ESC_GPIO_Port GPIOC
-#define BTN_ESC_EXTI_IRQn EXTI15_10_IRQn
 #define BTN_OK_Pin GPIO_PIN_15
 #define BTN_OK_GPIO_Port GPIOC
 #define LED1_Pin GPIO_PIN_3

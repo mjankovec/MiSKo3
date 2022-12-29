@@ -6,6 +6,15 @@
 
 #include <stdint.h>
 
+/* Demo sličice */
+#define LOGO_X    73
+#define LOGO_Y    158
+#define LOGO_SIZE (2 * LOGO_X * LOGO_Y)
+
+#define AMIGA_X    200
+#define AMIGA_Y    200
+#define AMIGA_SIZE (AMIGA_X * AMIGA_Y)
+
 extern uint8_t img_logotip[];
 extern uint8_t img_ni_programa[];
 

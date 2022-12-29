@@ -5,7 +5,7 @@
  *      Author: Andriy Honcharenko
  */
 
-#include <XPT2046_touch.h>
+#include "XPT2046_touch.h"
 
 #if defined (XPT2046_ORIENTATION_LANDSCAPE) || defined(XPT2046_ORIENTATION_LANDSCAPE_ROT180)
 

@@ -31,7 +31,7 @@ static inline void FMC_BANK1_SetAddress (LCD_IO_Data_t address)
 	*(LCD_IO_Data_t *)(FMC_BANK1_REG) = address;
 
 	// Počakaj na sinhronizacijo pomnilnika
-	//__DSB();
+	__DSB();
 }
 
 /*!
@@ -44,7 +44,7 @@ static inline void FMC_BANK1_WriteData(LCD_IO_Data_t data)
 	*(LCD_IO_Data_t *)(FMC_BANK1_MEM) = data;
 
 	// Počakaj na sinhronizacijo pomnilnika
-	//__DSB();
+	__DSB();
 }
 
 /*!
@@ -64,6 +64,10 @@ static inline uint16_t FMC_BANK1_ReadData(void)
  */
 void ILI9341_SetAddress(LCD_IO_Data_t *address)
 {
+
+#ifdef ILI9341_USEDMA
+	ILI9341_WaitTransfer();
+#endif
 	// Ukazni register je le eden, zato podajanje dolžine podatka ni potrebno
 	FMC_BANK1_SetAddress(*address);
 }
@@ -94,6 +98,7 @@ void ILI9341_SendRepeatedData(LCD_IO_Data_t data, uint32_t num_copies)
 		FMC_BANK1_WriteData(data);
 }
 
+#ifdef ILI9341_USEDMA
 /*!
   * @brief  Piši tabelo v grafični pomnilnik (GRAM) LCD krmilnika prek DMA
   * @param  *data  *naslov* tabele, v kateri so zapisani podatki
@@ -102,28 +107,103 @@ void ILI9341_SendRepeatedData(LCD_IO_Data_t data, uint32_t num_copies)
   */
 int32_t ILI9341_SendDataDMA(LCD_IO_Data_t *data, uint32_t length)
 {
-	uint32_t len;
+	uint32_t len,transfer,pdata;
 
-	switch (hLCDDMA.Init.PeriphDataAlignment) {
-	case DMA_PDATAALIGN_WORD:
-		len = (length / (2*LCD_IO_DATA_WRITE_CYCLES));
-		break;
-	case DMA_PDATAALIGN_BYTE:
-		len = 2*length/LCD_IO_DATA_WRITE_CYCLES;
-		break;
-	default:
-	case DMA_PDATAALIGN_HALFWORD:
-		len = (length / LCD_IO_DATA_WRITE_CYCLES);
-		break;
+	switch (hLCDDMA.Init.PeriphDataAlignment)
+	{
+		case DMA_PDATAALIGN_WORD:
+			len = (length / (2*LCD_IO_DATA_WRITE_CYCLES));
+			break;
+		case DMA_PDATAALIGN_BYTE:
+			len = 2*length/LCD_IO_DATA_WRITE_CYCLES;
+			break;
+		default:
+		case DMA_PDATAALIGN_HALFWORD:
+			len = (length / LCD_IO_DATA_WRITE_CYCLES);
+			break;
+	}
+
+
+
+	ILI9341_WaitTransfer();
+	HAL_DMA_DeInit(&hLCDDMA);
+	hLCDDMA.Init.PeriphInc = DMA_PINC_ENABLE;	//increment source address
+	HAL_DMA_Init(&hLCDDMA);
+	pdata = data;
+	do
+	{
+		ILI9341_WaitTransfer();
+		if (len > 65535)
+		{
+			len -= 65535;
+			transfer = 65535;
+		}
+		else
+		{
+			transfer = len;
+			len = 0;
+		}
+		if (transfer == 0) return 1;
+		if (HAL_DMA_Start_IT(&hLCDDMA, pdata, (uint32_t) FMC_BANK1_MEM, transfer) != HAL_OK) return 1;
+		pdata += transfer;
+	}
+	while (len);
+
+	return 0;
 }
 
-  if (HAL_DMA_Start_IT(&hLCDDMA, (uint32_t)data, (uint32_t)FMC_BANK1_MEM, len) != HAL_OK) {
-    /* Transfer Error */
-    return 1;
-  }
 
-  return 0;
+/*!
+ * @brief Večkrat zapiši isti podatek v grafični pomnilnik (GRAM) LCD krmilnika
+ * @param data spremenljivka s podatkom
+ * @param num_copies število kopij, ki se pošljejo
+ */
+int32_t ILI9341_SendRepeatedDataDMA(LCD_IO_Data_t data, uint32_t num_copies)
+{
+
+	uint32_t len, transfer;
+
+	switch (hLCDDMA.Init.PeriphDataAlignment)
+	{
+		case DMA_PDATAALIGN_WORD:
+			len = (num_copies / (2*LCD_IO_DATA_WRITE_CYCLES));
+			break;
+		case DMA_PDATAALIGN_BYTE:
+			len = 2*num_copies/LCD_IO_DATA_WRITE_CYCLES;
+			break;
+		default:
+		case DMA_PDATAALIGN_HALFWORD:
+			len = (num_copies / LCD_IO_DATA_WRITE_CYCLES);
+			break;
+	}
+
+	ILI9341_WaitTransfer();
+	HAL_DMA_DeInit(&hLCDDMA);
+	hLCDDMA.Init.PeriphInc = DMA_PINC_DISABLE;	// dont increment source address
+	HAL_DMA_Init(&hLCDDMA);
+
+	do
+	{
+		ILI9341_WaitTransfer();
+		if (len > 65535)
+		{
+			len -= 65535;
+			transfer = 65535;
+		}
+		else
+		{
+			transfer = len;
+			len = 0;
+		}
+		if (transfer == 0) return 1;
+		if (HAL_DMA_Start_IT(&hLCDDMA, (uint32_t) &data, (uint32_t)FMC_BANK1_MEM, transfer) != HAL_OK) return 1;
+	}
+	while (len);
+
+	return 0;
 }
+
+#endif
 
 /*!
  * @brief Preberi podatek iz naslova grafičnega pomnilnika (GRAM)
@@ -259,12 +339,12 @@ void ILI9341_Init(uint32_t color_space, uint32_t orientation)
 #endif
 }
 
-//! @brief Počakaj na prenos podatka FSMC->Ili9341. Možne dodelave.
+//! @brief Počakaj na prenos podatka FSMC->Ili9341.
 void ILI9341_WaitTransfer()
 {
-	// AddresSetupTime + 1 + DataSetupTime + 1. Glej `fmc.c'.
-	// načeloma 6 + 1 + 5 + 1 ms (13 ms), vendar ni zadosti
-	HAL_Delay(50);
+#ifdef ILI9341_USEDMA
+	while (HAL_DMA_GetState(&hLCDDMA) != HAL_DMA_STATE_READY);
+#endif
 }
 
 //! @brief Strojno omogoči zaslon

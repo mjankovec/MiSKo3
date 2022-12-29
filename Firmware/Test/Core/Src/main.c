@@ -37,9 +37,10 @@
 /* USER CODE BEGIN Includes */
 #include "usbd_cdc_if.h"
 #include "lcd.h"
+#include "lcd_demo.h"
 #include "ugui.h"
+#include "lcd_ugui.h"
 #include "XPT2046_touch.h"
-#include "ColorSpaces.h"
 #include "joystick.h"
 /* USER CODE END Includes */
 
@@ -72,102 +73,6 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-
-void UserPixelSetFunction(UG_S16 x, UG_S16 y, UG_COLOR c)
-{
-	ILI9341_SetDisplayWindow(x, y, 1, 1);
-	ILI9341_SendData((LCD_IO_Data_t *)&c, 1);
-}
-
-UG_RESULT _HW_FillFrame_(UG_S16 x, UG_S16 y, UG_S16 w, UG_S16 h, UG_COLOR c)
-{
-	LCD_FillRect(x, y, w, h, c);
-
-	return UG_RESULT_OK;
-}
-
-UG_GUI gui;
-
-void DrawStartScreen()
-{
-
-	UG_FillScreen(C_BLACK);
-
-	uint16_t pozicija_y=135, pozicija_x=150;
-
-	UG_FontSelect(&FONT_32X53);
-	UG_SetForecolor(C_VIOLET);
-	UG_PutString(pozicija_x-90,pozicija_y,"M");
-	UG_SetForecolor(C_BLUE);
-	UG_PutString(pozicija_x-60,pozicija_y,"i");
-	UG_SetForecolor(C_CYAN);
-	UG_PutString(pozicija_x-30,pozicija_y,"S");
-	UG_SetForecolor(C_GREEN);
-	UG_PutString(pozicija_x,pozicija_y,"K");
-	UG_SetForecolor(C_YELLOW);
-	UG_PutString(pozicija_x+30,pozicija_y,"o");
-	UG_SetForecolor(C_RED);
-	UG_PutString(pozicija_x+70,pozicija_y,"3");
-	UG_SetForecolor(C_WHITE);
-	UG_FontSelect(&FONT_16X26);
-	UG_PutString(5,pozicija_y+50,"To mi deli, Borut!");
-}
-
-void LCD_test()
-{
-	uint16_t color= 0xF800; //npr. rde�?a
-	ILI9341_SetDisplayWindow(0, 0, 320, 240);
-	for (uint32_t i=0; i<320*240; i++)
-	{
-		ILI9341_SendData(&color, 1);
-	}
-}
-
-float DrawColors(float intensity)
-{
-	uint16_t Data;
-	uint32_t time1, time2;
-	float framerate;
-	HSV_t HSV;
-	RGB_t RGB;
-
-	uint16_t *array;
-	uint16_t counter;
-	array = (uint16_t *) malloc(180*100);
-	counter = 0;
-	HSV.V=intensity;
-
-	ILI9341_SetDisplayWindow(0, 0, 180, 100);
-
-	for (int j=0; j<100;j++) //vrstice
-	{
-		HSV.S=j;
-		for (int i=0; i<180;i++) //stolpci
-		{
-			HSV.H=360-2*i;
-			HSVtoRGB(&HSV, &RGB);
-			array[counter]=RGB888_to_RGB565(&RGB);
-			counter++;
-	  }
-	}
-
-
-	time1 = HAL_GetTick();
-	for (counter = 0; counter<100*180; counter+=100)
-	{
-		Data = array[counter];
-		array[counter]=0;
-		ILI9341_SendData(array, 100*180);
-		array[counter] = Data;
-	}
-	time2=HAL_GetTick()-time1;
-
-	framerate = 180*1000.0/time2;
-	free(array);
-	return framerate;
-}
-
-
 /* USER CODE END 0 */
 
 /**
@@ -177,13 +82,13 @@ float DrawColors(float intensity)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	coord_t joystick_raw, joystick_out;
+	coord_t joystick_raw={0,0}, joystick_new={0,0}, joystick_prev={0,0};
 	joystick_t joystick;
 	char MSG[100]={0};
 	uint16_t touch_x = 0, touch_y = 0;
 
-	char str[10];
-	float framerate;
+	char str[50];
+	float bitrate;
 
   /* USER CODE END 1 */
 
@@ -243,23 +148,20 @@ int main(void)
   }
 
   LCD_Init();
-  UG_Init(&gui, UserPixelSetFunction, ILI9341_GetParam(LCD_WIDTH), ILI9341_GetParam(LCD_HEIGHT));
-  UG_FontSelect(&FONT_8X12);
+  LCD_UG_init();
+
+  LCD_Intro_LogoSlide(140,200);
+  bitrate = DrawColors(0,0,80);
+
   UG_SetForecolor(C_WHITE);
-  UG_SetBackcolor(C_BLACK);
-  UG_DriverRegister(DRIVER_FILL_FRAME, (void *)_HW_FillFrame_);
-  UG_DriverEnable(DRIVER_FILL_FRAME);
+  UG_FontSelect(&FONT_8X12);
+  sprintf(str,"%.2f MB/s, %.0f fps",bitrate/(1024*1024),bitrate/(100.0*180*2));
+  UG_PutString(5,105,str);
 
-  LCD_Intro_LogoSlide();
-  HAL_Delay(500);
-
-  DrawStartScreen();
-  framerate = DrawColors(80);
-
+  // to mi deli
   UG_SetForecolor(C_WHITE);
   UG_FontSelect(&FONT_16X26);
-  sprintf(str,"%.0f fps",framerate);
-  UG_PutString(5,105,str);
+  UG_PutString(5,205,"To mi deli, Borut!");
 
   joystick_init(&joystick);
   HAL_ADC_Start_DMA(&hadc4, &joystick_raw, 2);
@@ -275,6 +177,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+	  //LEDs and KEYs
 	 HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, !HAL_GPIO_ReadPin(BTN_OK_GPIO_Port, BTN_OK_Pin));
 	 HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, !HAL_GPIO_ReadPin(BTN_DOWN_GPIO_Port, BTN_DOWN_Pin));
 	 HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, !HAL_GPIO_ReadPin(BTN_RIGHT_GPIO_Port, BTN_RIGHT_Pin));
@@ -282,30 +185,41 @@ int main(void)
 	 HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, !HAL_GPIO_ReadPin(BTN_LEFT_GPIO_Port, BTN_LEFT_Pin));
 	 HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin, !HAL_GPIO_ReadPin(BTN_ESC_GPIO_Port, BTN_ESC_Pin));
 	 HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin, !HAL_GPIO_ReadPin(JOY_BTN_GPIO_Port, JOY_BTN_Pin));
-	 HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin, !HAL_GPIO_ReadPin(JOY_BTN_GPIO_Port, JOY_BTN_Pin));
 
-	 joystick_get(&joystick_raw, &joystick_out, &joystick);
-	 UG_DrawCircle(joystick_out.x+250, joystick_out.y+50,5, C_YELLOW);
+	 if (!HAL_GPIO_ReadPin(BTN_ESC_GPIO_Port, BTN_ESC_Pin))
+	 {
+		 UG_FillFrame(200, 0, 319, 120, C_BLACK);
+	 }
 
+	 //Joystick
+	 joystick_get(&joystick_raw, &joystick_new, &joystick);
+	 UG_DrawCircle(joystick_prev.x+250, joystick_prev.y+50,3, C_BLACK);
+	 UG_DrawCircle(joystick_new.x+250, joystick_new.y+50,3, C_YELLOW);
 
-	if(XPT2046_TouchPressed())
-	{
+	 joystick_prev.x = joystick_new.x;
+	 joystick_prev.y = joystick_new.y;
+
+	 //Touch
+	 if(XPT2046_TouchPressed())
+	 {
 		uint16_t x = 0, y = 0;
-
+		HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin, 1);
 		if(XPT2046_TouchGetCoordinates(&x, &y, 0))
 		{
 			touch_x = x;
 			touch_y = y;
 			UG_FillCircle(x, y,2, C_GREEN);
-			UG_FillCircle(250, 50, 49, C_BLACK);
 		}
-	}
+	 }
+	 else HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin, 0);
 
-	 sprintf(MSG, "Joystick X:%05d, Y:%05d, Touch: X:%05d, Y:%05d    \r",joystick_out.x,joystick_out.y, touch_x, touch_y);
+	 UG_DrawCircle(250, 50, 50, C_RED);
+
+	 //USART and USB
+	 sprintf(MSG, "Joystick X:%05d, Y:%05d, Touch: X:%05d, Y:%05d    \r",joystick_raw.x,joystick_raw.y, touch_x, touch_y);
 
 	 HAL_UART_Transmit(&huart3, MSG, strlen(MSG), 100);
 	 CDC_Transmit_FS(MSG, strlen(MSG));
-	 UG_DrawCircle(250, 50, 50, C_RED);
 
 	 HAL_Delay(20);
   }

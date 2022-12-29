@@ -7,15 +7,43 @@
 #include "lcd_ili9341_registers.h"
 #include "stm32g4xx.h"
 
+
+//basic communication definitions
 #define ILI9341_INTERFACE_WIDTH_16                /* 16 bit*/
 //#define ILI9341_INTERFACE_WIDTH_8                /* 8 bit*/
 
+#define ILI9341_USEDMA
+
+/* use DMA for bulk data transfer
+ * DMA settings in CubeMX
+ * DMA1, Channel 1
+ * Mode: Normal, Mem to mem,
+ * Data width: HalfWord for 16-bit interface, Byte for 8-bit interface,
+ * Source memory: increment address
+ * Destination memory: NO increment address
+*/
+
+/**
+ * @brief LCD DMA Configuration
+ */
+
+#ifdef ILI9341_USEDMA
+
+extern  DMA_HandleTypeDef hdma_memtomem_dma1_channel1;
+#define hLCDDMA           hdma_memtomem_dma1_channel1
+
+#endif
+
 #ifdef ILI9341_INTERFACE_WIDTH_16
-typedef uint16_t ILI9341_Data_t;
+	typedef uint16_t ILI9341_Data_t;
+	typedef uint16_t LCD_IO_Data_t;
+	#define LCD_IO_DATA_WRITE_CYCLES 1
 #endif
 
 #ifdef ILI9341_INTERFACE_WIDTH_8
-typedef uint8_t ILI9341_Data_t;
+	typedef uint8_t ILI9341_Data_t;
+	typedef uint8_t LCD_IO_Data_t;
+	#define LCD_IO_DATA_WRITE_CYCLES 2
 #endif
 
 #define ILI9341_ID     0x9341U
@@ -61,18 +89,8 @@ typedef uint8_t ILI9341_Data_t;
 #define FMC_BANK1_REG  ((uint16_t *)  0x60000000)
 #define FMC_BANK1_MEM  ((uint16_t *) (0x60000000 | 0x0010000))
 
-#ifdef ILI9341_INTERFACE_WIDTH_16
-	#define LCD_IO_DATA_WRITE_CYCLES 1
-	typedef uint16_t LCD_IO_Data_t;
-#endif
-
 #define SCROLL_LEFT  0
 #define SCROLL_RIGHT 1
-
-// #ifdef ILI9341_INTERFACE_WIDTH_8
-// 	#define LCD_IO_DATA_WRITE_CYCLES 2
-//  	typedef uint8_t LCD_IO_Data_t;
-// #endif
 
 typedef enum LCD_Param {
 	LCD_WIDTH,
@@ -81,16 +99,11 @@ typedef enum LCD_Param {
 	LCD_ORIENTATION
 } LCD_Param_t;
 
-/**
- * @brief LCD DMA Configuration
- */
-extern  DMA_HandleTypeDef hdma_memtomem_dma1_channel1;
-#define hLCDDMA           hdma_memtomem_dma1_channel1
-
 void    ILI9341_SetAddress (LCD_IO_Data_t *address);
 void    ILI9341_SendData(LCD_IO_Data_t *data, uint32_t length);
 void    ILI9341_SendRepeatedData(LCD_IO_Data_t data, uint32_t num_copies);
 int32_t ILI9341_SendDataDMA(LCD_IO_Data_t *data, uint32_t length);
+int32_t	ILI9341_SendRepeatedDataDMA(LCD_IO_Data_t data, uint32_t num_copies);
 void    ILI9341_RecvData(LCD_IO_Data_t *address, uint32_t length);
 
 void ILI9341_SetOrientation(uint32_t Orientation);

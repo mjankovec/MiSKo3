@@ -29,36 +29,6 @@ static void LCD_IO_Init()
 }
 
 /*!
- * @brief Strojno pospešen izris polnega pravokotnega polja
- * @param x x koordinata izhodišča
- * @param y y koordinata izhodišča
- * @param h višina polja
- * @param w širina polja
- * @param c podatek o barvi
- * @internal
- *
- * Funkcija izbere želeno območje, potem pa tolikokrat pošlje izbrano barvo,
- * kolikor slikovnih točk je potrebnih.
- */
-void LCD_FillRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint16_t c)
-{
-	uint32_t max_count   = ILI9341_GetParam(LCD_AREA);     /* Št. vseh pikslov     */
-	uint32_t pixel_count = ((w + 1) - x) * ((h + 1) - y);  /* Dejansko št. pikslov */
-
-	if(pixel_count > max_count)
-		pixel_count = max_count;
-
-	// Izbor koordinat piksla
-	ILI9341_SetDisplayWindow(x, y, w, h);
-
-	ILI9341_SendRepeatedData(c, pixel_count);
-	//while (pixel_count) {
-	//	LCD_IO_SendData((uint16_t *)&c, LCD_IO_DATA_WRITE_CYCLES);
-	//	pixel_count--;
-	//}
-}
-
-/*!
  * @brief Glavna inicializacija zaslona
  *
  * Inicializacija nastavi privzet barvni prostor (RGB565), orientacijo zaslona, vklopi osvetlitev,
@@ -93,6 +63,53 @@ void LCD_SetBacklight(uint8_t state)
 		LCD_BCKL_ON();
 	else
 		LCD_BCKL_OFF();
+}
+
+
+/*!
+ * @brief Strojno pospešen izris polnega pravokotnega polja
+ * @param x x koordinata izhodišča
+ * @param y y koordinata izhodišča
+ * @param h višina polja
+ * @param w širina polja
+ * @param c podatek o barvi
+ * @internal
+ *
+ * Funkcija izbere želeno območje, potem pa tolikokrat pošlje izbrano barvo,
+ * kolikor slikovnih točk je potrebnih.
+ */
+void LCD_FillRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint16_t c)
+{
+	uint32_t max_count   = ILI9341_GetParam(LCD_AREA);     /* Št. vseh pikslov     */
+	uint32_t pixel_count = w*h;  /* Dejansko št. pikslov */
+
+	if(pixel_count > max_count)
+		pixel_count = max_count;
+
+	// Izbor koordinat piksla
+	ILI9341_SetDisplayWindow(x, y, w, h);
+
+#ifdef ILI9341_USEDMA
+	ILI9341_SendRepeatedDataDMA(c, pixel_count);
+#else
+	ILI9341_SendRepeatedData(c, pixel_count);
+#endif
+
+}
+
+/*!
+ * @brief Wrapper funkcija za pošiljanje podatkov na LCD
+ * @param *data kazalec na polje podatkov
+ * @param length veliksot polja
+ *
+ */
+void LCD_SendData(LCD_IO_Data_t *data, uint32_t length)
+{
+#ifdef ILI9341_USEDMA
+	ILI9341_SendDataDMA(data, length);
+#else
+	ILI9341_SendData(data, length);
+#endif
 }
 
 /*!

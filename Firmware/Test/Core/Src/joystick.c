@@ -8,10 +8,10 @@
 
 void joystick_init(joystick_t *joystick)
 {
-	joystick->raw_min.x = 780;
-	joystick->raw_max.x = 3330;
-	joystick->raw_min.y = 780;
-	joystick->raw_max.y = 3330;
+	joystick->raw_min.x = 640;
+	joystick->raw_max.x = 3070;
+	joystick->raw_min.y = 733;
+	joystick->raw_max.y = 3185;
 	joystick->out_max.x = 90;
 	joystick->out_max.y = 90;
 

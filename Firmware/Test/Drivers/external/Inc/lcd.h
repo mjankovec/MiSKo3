@@ -35,20 +35,10 @@ extern EXTI_HandleTypeDef    hexti_lcd_te;
 #define LCD_BCKL_ON()        WRITE_REG(LCD_BCKL_GPIO_PORT->BSRR, LCD_BCKL_GPIO_PIN)
 #define LCD_BCKL_OFF()       WRITE_REG(LCD_BCKL_GPIO_PORT->BRR, LCD_BCKL_GPIO_PIN)
 
-/* Demo sličice */
-#define LOGO_X    73
-#define LOGO_Y    158
-#define LOGO_SIZE (2 * LOGO_X * LOGO_Y)
-
-#define AMIGA_X    200
-#define AMIGA_Y    200
-#define AMIGA_SIZE (AMIGA_X * AMIGA_Y)
-
 void LCD_FillRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint16_t c);
 void LCD_Init();
 void LCD_SetBacklight(uint8_t state);
 void LCD_ClearScreen();
-void LCD_Intro_LogoSlide();
-void LCD_Intro_NoProgramHalt();
+void LCD_SendData(LCD_IO_Data_t *data, uint32_t length);
 
 #endif /* LCD_H_ */
