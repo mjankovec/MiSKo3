@@ -50,7 +50,7 @@ Configuration1_Item1=Record=SchPrintView|ShowNoERC=True|ShowParamSet=True|ShowPr
 OutputType2=PCB Print
 OutputName2=Copper layers
 OutputCategory2=Documentation
-OutputDocumentPath2=Misko 3 1.0.PcbDoc
+OutputDocumentPath2=Misko 3.PcbDoc
 OutputVariantName2=
 OutputEnabled2=1
 OutputEnabled2_OutputMedium1=0
@@ -159,7 +159,7 @@ Configuration3_Item9=DesignItemId=100|Designator=120|Description=120|Value=100|F
 OutputType4=Gerber
 OutputName4=Gerber Files
 OutputCategory4=Fabrication
-OutputDocumentPath4=Misko 3 1.0 panel.PcbDoc
+OutputDocumentPath4=Misko 3 panel.PcbDoc
 OutputVariantName4=
 OutputEnabled4=0
 OutputEnabled4_OutputMedium1=0
@@ -172,7 +172,7 @@ Configuration4_Item1=AddToAllLayerClasses.Set= |AddToAllPlots.Set=SerializeLayer
 OutputType5=NC Drill
 OutputName5=NC Drill Files
 OutputCategory5=Fabrication
-OutputDocumentPath5=Misko 3 1.0 panel.PcbDoc
+OutputDocumentPath5=Misko 3 panel.PcbDoc
 OutputVariantName5=
 OutputEnabled5=0
 OutputEnabled5_OutputMedium1=0
@@ -185,7 +185,7 @@ Configuration5_Item1=BoardEdgeRoutToolDia=2000000|GenerateBoardEdgeRout=False|Ge
 OutputType6=PCB Print
 OutputName6=Mask sets
 OutputCategory6=Documentation
-OutputDocumentPath6=Misko 3 1.0.PcbDoc
+OutputDocumentPath6=Misko 3.PcbDoc
 OutputVariantName6=
 OutputEnabled6=1
 OutputEnabled6_OutputMedium1=0
@@ -224,7 +224,7 @@ PcbPrintPreferences6=SubsititueFont_Default=True|SubsititueFont_Serif=True|Subsi
 OutputType7=Pick Place
 OutputName7=Generates pick and place files
 OutputCategory7=Assembly
-OutputDocumentPath7=Misko 3 1.0.PcbDoc
+OutputDocumentPath7=Misko 3.PcbDoc
 OutputVariantName7=
 OutputEnabled7=0
 OutputEnabled7_OutputMedium1=0
@@ -237,7 +237,7 @@ Configuration7_Item1=Record=PickPlaceView|Units=Imperial|GenerateCSVFormat=True|
 OutputType8=PCB Print
 OutputName8=Assembly
 OutputCategory8=Documentation
-OutputDocumentPath8=Misko 3 1.0.PcbDoc
+OutputDocumentPath8=Misko 3.PcbDoc
 OutputVariantName8=
 OutputEnabled8=1
 OutputEnabled8_OutputMedium1=0
@@ -276,7 +276,7 @@ PcbPrintPreferences8=SubsititueFont_Default=True|SubsititueFont_Serif=True|Subsi
 OutputType9=PCB 3D Video
 OutputName9=PCB 3D Video
 OutputCategory9=Documentation
-OutputDocumentPath9=Misko 3 1.0.PcbDoc
+OutputDocumentPath9=Misko 3.PcbDoc
 OutputVariantName9=
 OutputEnabled9=0
 OutputEnabled9_OutputMedium1=0
@@ -290,7 +290,7 @@ Configuration9_Item1=Record=Pcb3DVideoRenderer|ShowFloorShadow=True|ViewConfigTy
 OutputType10=PCB 3D Print
 OutputName10=PCB 3D Print
 OutputCategory10=Documentation
-OutputDocumentPath10=Misko 3 1.0.PcbDoc
+OutputDocumentPath10=Misko 3.PcbDoc
 OutputVariantName10=
 OutputEnabled10=0
 OutputEnabled10_OutputMedium1=0
