@@ -198,12 +198,12 @@ void Error_Handler(void);
 #define TOUCH_PENIRQ_GPIO_Port GPIOD
 #define LCD_CS_Pin GPIO_PIN_7
 #define LCD_CS_GPIO_Port GPIOD
-#define LIN_SLP_Pin GPIO_PIN_5
-#define LIN_SLP_GPIO_Port GPIOB
+#define FLASH_CS_Pin GPIO_PIN_5
+#define FLASH_CS_GPIO_Port GPIOB
 #define LCD_BKLT_Pin GPIO_PIN_6
 #define LCD_BKLT_GPIO_Port GPIOB
-#define FLASH_CS_Pin GPIO_PIN_0
-#define FLASH_CS_GPIO_Port GPIOE
+#define LIN_SLEEP_Pin GPIO_PIN_0
+#define LIN_SLEEP_GPIO_Port GPIOE
 #define TOUCH_CS_Pin GPIO_PIN_1
 #define TOUCH_CS_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */

@@ -1,0 +1,3 @@
+../Drivers/external/lcd_demo.c:4:7:DrawColors	72	static
+../Drivers/external/lcd_demo.c:49:6:LCD_Intro_LogoSlide	16	static
+../Drivers/external/lcd_demo.c:73:6:LCD_Intro_NoProgramHalt	32	static

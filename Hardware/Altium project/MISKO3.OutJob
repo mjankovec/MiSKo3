@@ -148,14 +148,16 @@ Configuration3_Name4=GroupOrder
 Configuration3_Item4=Comment=True|Footprint=True|Code=True
 Configuration3_Name5=PcbDocumentFileName
 Configuration3_Item5=Misko 3 1.0.PcbDoc
-Configuration3_Name6=VisibleOrder
-Configuration3_Item6=Line #=54|Designator=120|Code=100|Value=100|Description=120|Comment=120|Quantity=120|Layer=100|Assembly=70|Provider=65|Manufacturer 1=100|Manufacturer Part Number 1=100|Supplier 1=100|Supplier Part Number 1=100|Supplier Unit Price 1=100
-Configuration3_Name7=VisibleOrder_Base
+Configuration3_Name6=SortOrder
+Configuration3_Item6=Designator=Up
+Configuration3_Name7=VisibleOrder
 Configuration3_Item7=Line #=54|Designator=120|Code=100|Value=100|Description=120|Comment=120|Quantity=120|Layer=100|Assembly=70|Provider=65|Manufacturer 1=100|Manufacturer Part Number 1=100|Supplier 1=100|Supplier Part Number 1=100|Supplier Unit Price 1=100
-Configuration3_Name8=VisibleOrder_Consolidated
-Configuration3_Item8=Line #=54|Comment=120|Description=120|Designator=120|Quantity=120|Manufacturer 1=102|Manufacturer Part Number 1=169|Manufacturer Lifecycle 1=147|Supplier 1=75|Supplier Part Number 1=142|Supplier Unit Price 1=127|Supplier Subtotal 1=122
-Configuration3_Name9=VisibleOrder_Flat
-Configuration3_Item9=DesignItemId=100|Designator=120|Description=120|Value=100|Footprint=120|Code=100|Quantity=120|Layer=100
+Configuration3_Name8=VisibleOrder_Base
+Configuration3_Item8=Line #=54|Designator=120|Code=100|Value=100|Description=120|Comment=120|Quantity=120|Layer=100|Assembly=70|Provider=65|Manufacturer 1=100|Manufacturer Part Number 1=100|Supplier 1=100|Supplier Part Number 1=100|Supplier Unit Price 1=100
+Configuration3_Name9=VisibleOrder_Consolidated
+Configuration3_Item9=Line #=54|Comment=120|Description=120|Designator=120|Quantity=120|Manufacturer 1=102|Manufacturer Part Number 1=169|Manufacturer Lifecycle 1=147|Supplier 1=75|Supplier Part Number 1=142|Supplier Unit Price 1=127|Supplier Subtotal 1=122
+Configuration3_Name10=VisibleOrder_Flat
+Configuration3_Item10=DesignItemId=100|Designator=120|Description=120|Value=100|Footprint=120|Code=100|Quantity=120|Layer=100
 OutputType4=Gerber
 OutputName4=Gerber Files
 OutputCategory4=Fabrication
@@ -292,18 +294,18 @@ OutputName10=PCB 3D Print
 OutputCategory10=Documentation
 OutputDocumentPath10=Misko 3.PcbDoc
 OutputVariantName10=
-OutputEnabled10=0
+OutputEnabled10=1
 OutputEnabled10_OutputMedium1=0
 OutputEnabled10_OutputMedium2=0
 OutputEnabled10_OutputMedium3=0
-OutputEnabled10_OutputMedium4=0
+OutputEnabled10_OutputMedium4=5
 OutputDefault10=0
-PageOptions10=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-3|MediaType=1|DitherType=10|PrintScaleMode=1|PaperKind=A4|PaperIndex=9
+PageOptions10=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=2.31|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-3|MediaType=1|DitherType=10|PrintScaleMode=1|PaperKind=A4|PaperIndex=9
 Configuration10_Name1=OutputConfigurationParameter1
-Configuration10_Item1=Record=Pcb3DPrintView|ResX=300|ResY=300|ViewX=50433220|ViewY=20984252|LookAtX=42838656|LookAtY=31830708|LookAtZ=0|UpX=0|UpY=1|UpZ=0|FOV=0|QuatX=0|QuatY=0|QuatZ=0|QuatW=1|Zoom=2.45473122675887E-5|UnitsPercent=True|UnitsDPI=True|LockResAspect=True|ViewConfigType=.config_3d|CustomCamera=False|ViewFromTop=True|ScreenWidth=0|ScreenHeight=0|ImageOutputType=1|ViewConfig= |DocumentPath=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v9_1\Misko 3 1.0.PcbDoc
+Configuration10_Item1=Record=Pcb3DPrintView|ResX=300|ResY=300|ViewX=50433220|ViewY=20984252|LookAtX=42838656|LookAtY=31830708|LookAtZ=0|UpX=0|UpY=1|UpZ=0|FOV=0|QuatX=0|QuatY=0|QuatZ=0|QuatW=1|Zoom=2.45473122675887E-5|UnitsPercent=True|UnitsDPI=True|LockResAspect=True|ViewConfigType=.config_3d|CustomCamera=False|ViewFromTop=True|ScreenWidth=0|ScreenHeight=0|ImageOutputType=1|ViewConfig=RECORD\3Board\2CFGALL.CONFIGURATIONKIND\33\2CFGALL.CONFIGURATIONDESC\3Altium%203D%20Red%20Configuration\2CFGALL.COMPONENTBODYREFPOINTCOLOR\316777215\2CFGALL.COMPONENTBODYSNAPPOINTCOLOR\316777215\2CFGALL.SHOWCOMPONENTSNAPMARKERS\3TRUE\2CFGALL.SHOWCOMPONENTSNAPREFERENCE\3FALSE\2CFGALL.SHOWCOMPONENTSNAPCUSTOM\3TRUE\2CFG3D.POSITIVETOPSOLDERMASK\3TRUE\2CFG3D.POSITIVEBOTTOMSOLDERMASK\3TRUE\2CFG3D.SHOWCOMPONENTBODIES\3SYSTEM\2CFG3D.SHOWCOMPONENTSTEPMODELS\3SYSTEM\2CFG3D.COMPONENTMODELPREFERENCE\30\2CFG3D.SHOWCOMPONENTAXES\3TRUE\2CFG3D.SHOWBOARDCORE\3TRUE\2CFG3D.SHOWBOARDPREPREG\3TRUE\2CFG3D.SHOWTOPSILKSCREEN\3TRUE\2CFG3D.SHOWBOTSILKSCREEN\3TRUE\2CFG3D.SHOWORIGINMARKER\3TRUE\2CFG3D.EYEDIST\32000\2CFG3D.SHOWCUTOUTS\3TRUE\2CFG3D.SHOWROUTETOOLPATH\3TRUE\2CFG3D.SHOWROOMS3D\3FALSE\2CFG3D.USESYSCOLORSFOR3D\3FALSE\2CFG3D.WORKSPACECOLOR\310854550\2CFG3D.BOARDCORECOLOR\314152690\2CFG3D.BOARDPREPREGCOLOR\30\2CFG3D.TOPSOLDERMASKCOLOR\31509789\2CFG3D.BOTSOLDERMASKCOLOR\31509789\2CFG3D.COPPERCOLOR\33323360\2CFG3D.TOPSILKSCREENCOLOR\315461355\2CFG3D.BOTSILKSCREENCOLOR\315461355\2CFG3D.WORKSPACELUMINANCEVARIATION\330\2CFG3D.WORKSPACEBEGINCOLOR\312763321\2CFG3D.WORKSPACEENDCOLOR\38880756\2CFG3D.WORKSPACECOLOROPACITY\31.000000\2CFG3D.BOARDCORECOLOROPACITY\30.910000\2CFG3D.BOARDPREPREGCOLOROPACITY\30.500000\2CFG3D.TOPSOLDERMASKCOLOROPACITY\30.730000\2CFG3D.BOTSOLDERMASKCOLOROPACITY\30.730000\2CFG3D.COPPERCOLOROPACITY\31.000000\2CFG3D.TOPSILKSCREENCOLOROPACITY\31.000000\2CFG3D.BOTSILKSCREENCOLOROPACITY\31.000000\2CFG3D.BOARDTHICKNESSSCALING\31.000000\2CFG3D.SHOWMECHANICALLAYERS\3FALSE\2CFG3D.MECHANICALLAYERSOPACITY\31.000000\2CFG3D.MECHCOVERLAYERUPDATED\3FALSE|DocumentPath=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.1\PCB\v1.1\Misko 3 1.1.PcbDoc
 
 [PublishSettings]
-OutputFilePath2=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v9_1\Project Outputs for MISKO3\
+OutputFilePath2=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.1\PCB\v1.1\Project Outputs for MISKO3\
 ReleaseManaged2=1
 OutputBasePath2=Project Outputs for MISKO3
 OutputPathMedia2=
@@ -353,7 +355,7 @@ FFmpegPixelFormat3=12
 FFmpegQuality3=80
 WmvVideoCodecName3=Windows Media Video V7
 WmvQuality3=80
-OutputFilePath4=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v9_1\Project Outputs for MISKO3_V5\.PDF
+OutputFilePath4=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v1.1\Project Outputs for MISKO3\MISKO3_V9.PDF
 ReleaseManaged4=1
 OutputBasePath4=Project Outputs for MISKO3
 OutputPathMedia4=
@@ -361,10 +363,10 @@ OutputPathMediaValue4=
 OutputPathOutputer4=[Output Type]
 OutputPathOutputerPrefix4=
 OutputPathOutputerValue4=
-OutputFileName4=MISKO3_V9.PDF
+OutputFileName4=MISKO3.PDF
 OutputFileNameMulti4=
-UseOutputNameForMulti4=1
-OutputFileNameSpecial4=
+UseOutputNameForMulti4=0
+OutputFileNameSpecial4==ProjectName
 OpenOutput4=1
 PromptOverwrite4=1
 PublishMethod4=0
@@ -382,7 +384,7 @@ PDFACompliance4=Disabled
 PDFVersion4=Default
 
 [GeneratedFilesSettings]
-RelativeOutputPath2=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v9_1\Project Outputs for MISKO3\
+RelativeOutputPath2=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.1\PCB\v1.1\Project Outputs for MISKO3\
 OpenOutputs2=1
 AddToProject2=1
 TimestampFolder2=0
@@ -394,6 +396,6 @@ OpenIPCOutput2=0
 EnableReload2=0
 RelativeOutputPath3=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v9_1\Project Outputs for MISKO3\MISKO3.avi
 OpenOutputs3=1
-RelativeOutputPath4=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v9_1\Project Outputs for MISKO3_V5\.PDF
+RelativeOutputPath4=C:\Users\marko\OneDrive - Univerza v Ljubljani\Pedagogika\OME\Razvojni sistem\Misko v3.0\PCB\v1.1\Project Outputs for MISKO3\MISKO3_V9.PDF
 OpenOutputs4=1
 

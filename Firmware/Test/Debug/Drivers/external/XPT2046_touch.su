@@ -1,0 +1,4 @@
+../Drivers/external/XPT2046_touch.c:22:13:XPT2046_TouchSelect	0	static
+../Drivers/external/XPT2046_touch.c:27:13:XPT2046_TouchUnselect	0	static
+../Drivers/external/XPT2046_touch.c:32:6:XPT2046_TouchPressed	0	static
+../Drivers/external/XPT2046_touch.c:37:6:XPT2046_TouchGetCoordinates	64	static

@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------------------
+Gerber File Extension Report For: Misko 3 1.1 panel.GBR   23. 02. 2023  09:36:42
+------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------
+Layer Extension     Layer Description                      
+------------------------------------------------------------------------------------------
+.GTO                Top Overlay                             
+.GTP                Top Paste                               
+.GTS                Top Mask                                
+.GTL                Top (LS)                                
+.G1                 Mid 1 (LS)                              
+.G2                 Mid 2 (GND)                             
+.G3                 Mid 3 (P/HS)                            
+.G4                 Mid 4 (GND)                             
+.GBL                Bottom (HS)                             
+.GBS                Bottom Mask                             
+.GBP                Bottom Paste                            
+.GBO                Bottom Overlay                          
+.GM1                Mechanical 1                            
+.GM2                Mechanical 2                            
+.GM3                Fab Notes                               
+.GM6                Route Tool Path                         
+.GM7                V Cut                                   
+.GM8                Panel shape                             
+------------------------------------------------------------------------------------------

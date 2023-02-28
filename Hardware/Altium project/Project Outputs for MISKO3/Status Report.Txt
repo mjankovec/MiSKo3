@@ -1,0 +1,10 @@
+Output: Bill of Materials
+Type  : BOM
+From  : Variant [[No Variations]] of Project [MISKO3 v1.1.PrjPcb]
+   Generated File[//unilj-my.sharepoint.com/personal/markoj_fe1_uni-lj_si/Documents/Pedagogika/OME/Razvojni sistem/Misko v3.1/PCB/v1.1/Project Outputs for MISKO3/Bill of Materials-MISKO3 v1.1.xlsx]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 09:37:17 On 23. 02. 2023

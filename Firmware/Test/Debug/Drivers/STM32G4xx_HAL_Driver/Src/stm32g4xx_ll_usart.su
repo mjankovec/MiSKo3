@@ -1,0 +1,5 @@
+../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.c:128:13:LL_USART_DeInit	0	static
+../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.c:201:13:LL_USART_Init	16	static
+../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.c:317:6:LL_USART_StructInit	0	static
+../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.c:344:13:LL_USART_ClockInit	4	static
+../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.c:391:6:LL_USART_ClockStructInit	0	static

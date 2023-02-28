@@ -1,0 +1,23 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Misko 3 1.1 panel.PcbDoc   23. 02. 2023  09:37:06
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top (LS) to Bottom (HS)
+ASCII RoundHoles File : Misko 3 1.1 panel-RoundHoles.TXT
+ASCII SlotHoles File : Misko 3 1.1 panel-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      8mil (0.2mm)                                              Round             2000      PTH        254.03inch (6452.49mm)
+T2      16mil (0.4mm)                                             Round             56        PTH        8.23inch (209.15mm)
+T3      24mil (0.6mm)                                             Slot              16        PTH        18.95inch (481.27mm)
+T4      33mil (0.85mm)                                            Round             200       PTH        37.16inch (943.97mm)
+T5      37mil (0.95mm)                                            Round             144       PTH        15.43inch (391.96mm)
+T6      39mil (1mm)                                               Round             48        PTH        16.30inch (414.04mm)
+T7      47mil (1.19mm)                                            Round             8         NPTH       7.39inch (187.79mm)
+T8      59mil (1.5mm)                                             Round             8         NPTH       9.90inch (251.54mm)
+T9      126mil (3.2mm)                                            Round             24        NPTH       33.59inch (853.23mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              2504
+
+Total Processing Time (hh:mm:ss) : 00:00:03

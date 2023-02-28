@@ -1,0 +1,2 @@
+../Core/Src/joystick.c:9:6:joystick_init	0	static
+../Core/Src/joystick.c:26:6:joystick_get	4	static

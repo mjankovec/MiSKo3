@@ -1,0 +1,2 @@
+../Drivers/external/ColorSpaces.c:5:6:HSVtoRGB	24	static
+../Drivers/external/ColorSpaces.c:35:10:RGB888_to_RGB565	0	static

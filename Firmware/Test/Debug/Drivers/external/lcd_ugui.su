@@ -1,0 +1,3 @@
+../Drivers/external/lcd_ugui.c:11:6:UserPixelSetFunction	16	static
+../Drivers/external/lcd_ugui.c:17:11:_HW_FillFrame_	16	static
+../Drivers/external/lcd_ugui.c:26:8:LCD_UG_init	8	static
