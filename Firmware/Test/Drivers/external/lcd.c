@@ -90,7 +90,9 @@ void LCD_FillRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint16_t c)
 	ILI9341_SetDisplayWindow(x, y, w, h);
 
 #ifdef ILI9341_USEDMA
-	ILI9341_SendRepeatedDataDMA(c, pixel_count);
+	static uint16_t static_c;
+	static_c = c;
+	ILI9341_SendRepeatedDataDMA(&static_c, pixel_count);
 #else
 	ILI9341_SendRepeatedData(c, pixel_count);
 #endif
