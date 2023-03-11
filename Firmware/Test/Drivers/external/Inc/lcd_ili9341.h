@@ -103,7 +103,7 @@ void    ILI9341_SetAddress (LCD_IO_Data_t *address);
 void    ILI9341_SendData(LCD_IO_Data_t *data, uint32_t length);
 void    ILI9341_SendRepeatedData(LCD_IO_Data_t data, uint32_t num_copies);
 int32_t ILI9341_SendDataDMA(LCD_IO_Data_t *data, uint32_t length);
-int32_t	ILI9341_SendRepeatedDataDMA(LCD_IO_Data_t data, uint32_t num_copies);
+int32_t	ILI9341_SendRepeatedDataDMA(LCD_IO_Data_t *data, uint32_t num_copies);
 void    ILI9341_RecvData(LCD_IO_Data_t *address, uint32_t length);
 
 void ILI9341_SetOrientation(uint32_t Orientation);
