@@ -158,7 +158,7 @@ int32_t ILI9341_SendDataDMA(LCD_IO_Data_t *data, uint32_t length)
  * @param data spremenljivka s podatkom
  * @param num_copies število kopij, ki se pošljejo
  */
-int32_t ILI9341_SendRepeatedDataDMA(LCD_IO_Data_t data, uint32_t num_copies)
+int32_t ILI9341_SendRepeatedDataDMA(LCD_IO_Data_t *data, uint32_t num_copies)
 {
 
 	uint32_t len, transfer;
@@ -196,7 +196,7 @@ int32_t ILI9341_SendRepeatedDataDMA(LCD_IO_Data_t data, uint32_t num_copies)
 			len = 0;
 		}
 		if (transfer == 0) return 1;
-		if (HAL_DMA_Start_IT(&hLCDDMA, (uint32_t) &data, (uint32_t)FMC_BANK1_MEM, transfer) != HAL_OK) return 1;
+		if (HAL_DMA_Start_IT(&hLCDDMA, (uint32_t) data, (uint32_t)FMC_BANK1_MEM, transfer) != HAL_OK) return 1;
 	}
 	while (len);
 
